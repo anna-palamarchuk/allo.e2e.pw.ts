@@ -1,6 +1,5 @@
 import { Locator, Page, expect } from "@playwright/test";
 import { BasePage } from "./BasePage";
-
 export class SearchPage extends BasePage {
   private searchInputLocator: Locator;
   private searchResultsTitle: Locator;
@@ -35,43 +34,88 @@ export class SearchPage extends BasePage {
   }
 
   async checkSearchProductItemsInResult(searchData: string) {
-
     const totalResults = await this.productTitleSearchResults.count();
     const itemsToCheck = Math.min(5, totalResults);
-
     for (let i = 0; i < itemsToCheck; i++) {
       const title = await this.productTitleSearchResults.nth(i).innerText();
       expect(title.toLowerCase()).toContain(searchData.toLowerCase());
     }
-
   }
 
-   async getRandomSearchData(searchData: { inputName: string }[]) {
-    const randomIndex = Math.floor(Math.random() * searchData.length); 
+  async getRandomSearchData(searchData: { inputName: string }[]) {
+    const randomIndex = Math.floor(Math.random() * searchData.length);
     return searchData[randomIndex].inputName;
   }
 
-  async clickOnBuyButtonFromSearchResultPage() {
-  const count = await this.productCart.count();
+  async clickOnBuyButtonFromSearchResultPage(): Promise<string | undefined> {
+    const count = await this.productCart.count();
 
-  for (let i = 0; i < count; i++) {
-    const product = this.productCart.nth(i);
-    
-    const buyButton = product.locator('button:has-text("Купити")');
+    for (let i = 0; i < count; i++) {
+      const product = this.productCart.nth(i);
+      const buyButton = product.locator('button:has-text("Купити")');
 
-    if (await buyButton.count() === 0) {
-      continue;
+      if (await buyButton.count() === 0) {
+        continue;
+      }
+
+      const outOfStockText = product.locator(':has-text("Немає в наявності")');
+      if (await outOfStockText.count() > 0) {
+        continue;
+      }
+
+      const productTitle = (
+        await product.locator('.product-card__content > a').innerText()
+      ).replace(/\s+/g, ' ').trim();
+
+      await buyButton.click();
+      return productTitle;
     }
-
-    const outOfStockText = product.locator(':has-text("Немає в наявності")');
-    if (await outOfStockText.count() > 0) {
-      continue;
-    }
-
-    await buyButton.click();
-    return;
   }
 
-}
+  async clickOnFavoriteIcon(): Promise<string> {
+    const productCount = await this.productCart.count();
 
+    for (let i = 0; i < productCount; i++) {
+      const product = this.productCart.nth(i);
+      const favoriteButton = product.locator('button.favorite');
+
+      if (await favoriteButton.count() > 0 && await favoriteButton.isVisible()) {
+        const productTitle = await product.locator('.product-card__content > a').innerText();
+        await favoriteButton.click();
+        return productTitle;
+      }
+    }
+  }
+
+  async clickOnCompareButtonOnTwoProducts(): Promise<string[]> {
+    const productCount = await this.productCart.count();
+    const selectedProductsTitles: string[] = [];
+
+    for (let i = 0; i < productCount; i++) {
+      const product = this.productCart.nth(i);
+      const compareButton = product.locator('button.compare');
+
+      if ((await compareButton.count()) > 0 && (await compareButton.isVisible())) {
+        const productTitle = await product.locator('.product-card__content > a').innerText();
+        await compareButton.click();
+        selectedProductsTitles.push(productTitle);
+
+        if (selectedProductsTitles.length === 2) break;
+      }
+    } return selectedProductsTitles;
+  }
+  async clickOnProduct(): Promise<string> {
+    const productCount = await this.productCart.count();
+
+    for (let i = 0; i < productCount; i++) {
+      const product = this.productCart.nth(i);
+      const productTitle = product.locator('.product-card__content > a');
+
+      if (await productTitle.count() > 0 && await productTitle.isVisible()) {
+        const title = await productTitle.innerText();
+        await productTitle.click();
+        return title.trim();
+      }
+    }
+  }
 }

@@ -23,6 +23,7 @@ export default [
     files: ["**/*.spec.ts", "**/*.test.ts"], 
     rules: {
       "playwright/expect-expect": "off", 
+      "@typescript-eslint/no-explicit-any": "off",
     },
   },
 ];

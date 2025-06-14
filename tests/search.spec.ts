@@ -2,10 +2,6 @@ import { test } from "../app/fixtures/fixture";
 import { searchData } from "test-data/searchData";
 
 test.describe('Search suite', () => {
-  test.beforeEach(async ({ page }) => {
-    await page.goto('https://allo.ua/ua/');
-  });
-
   for (const items of searchData) {
     test(`A1 Search items ${items.inputName}`, async ({ searchPage }) => {
       await test.step('Enter keyword in search field', async () => {

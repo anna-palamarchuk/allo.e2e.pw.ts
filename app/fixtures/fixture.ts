@@ -4,6 +4,10 @@ import { CategoriesPage } from "app/pages/CategoriesPage";
 import { CartModal } from "app/modals/CartModals";
 import { SignInModal } from "app/modals/SignInModal";
 import {CheckoutPage} from 'app/pages/CheckoutPage';
+import { FavoriteModal } from "app/modals/FavoriteModal";
+import { CompareProductsPage } from "app/pages/CompareProductsPage";
+import { ProductDetailsPage } from "app/pages/ProductDetailsPage";
+import { FiltersPage } from "app/pages/FiltersPage";
 
 type Fixture = {
     searchPage: SearchPage;
@@ -11,6 +15,10 @@ type Fixture = {
     cartModal: CartModal;
     signInModal: SignInModal;
     checkoutPage: CheckoutPage,
+    favoriteModal: FavoriteModal;
+    compareProductsPage: CompareProductsPage;
+    productDetailsPage: ProductDetailsPage;
+    filtersPage: FiltersPage;
 }
 
 export const test = base.extend<Fixture>({
@@ -40,5 +48,21 @@ export const test = base.extend<Fixture>({
     checkoutPage: async ({page}, use) => {
         const checkoutPage = new CheckoutPage(page);
         await use(checkoutPage)
+    },
+    favoriteModal: async ({page}, use) => {
+        const favoriteModal = new FavoriteModal(page);
+        await use(favoriteModal)
+    },
+    compareProductsPage: async ({page}, use) => {
+        const compareProductsPage = new CompareProductsPage(page);
+        await use(compareProductsPage)
+    },
+    productDetailsPage: async ({page}, use) => {
+        const productDetailsPage = new ProductDetailsPage(page);
+        await use(productDetailsPage)
+    },
+    filtersPage: async ({page}, use) => {
+        const filtersPage = new FiltersPage(page);
+        await use(filtersPage)
     }
 })

@@ -5,7 +5,7 @@ export class CategoriesPage extends BasePage {
   private categoryButton: Locator;
   private categoriesMenu: Locator;
   private categoryItem: Locator;
-  private productsList: Locator;
+  productsList: Locator;
   private productItem: Locator;
 
   constructor(page: Page) {
@@ -31,7 +31,6 @@ export class CategoriesPage extends BasePage {
 
   getTypeOfSubCategory(): Locator {
     return this.page.locator('.portal-group__title');
-
   }
 
   getBuyButton(productCard: Locator): Locator {
@@ -92,5 +91,18 @@ export class CategoriesPage extends BasePage {
     await buyButton.click();
 
     return productTitle;
+  }
+
+  async navigateToMobileCategory() {
+    await this.clickOnCategoriesButton();
+    await this.getCategoriesMenu();
+    const smartphonesCategory = this.categoryItem.filter({ hasText: "Смартфони та телефони" });
+    await expect(smartphonesCategory).toBeVisible();
+    await smartphonesCategory.click();
+    const smartphoneSubSectionTitle = this.getTypeOfSubCategory().filter({
+      hasText: "Смартфони та мобільні телефони"
+    });
+    await expect(smartphoneSubSectionTitle).toBeVisible();
+    await smartphoneSubSectionTitle.click();
   }
 }

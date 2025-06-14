@@ -23,7 +23,6 @@ export const test = baseFixture
             await signInModal.fillSignInForm();
 
             await LoginRequest(loginPage);
-            // await signInModal.verifyLogIn();
             await context.storageState({ path: workerStorageState });
             await context.close();
             await use(workerStorageState);

@@ -39,8 +39,8 @@ export class CartModal extends BaseModal {
     }
 
     await expect(this.cartHeader).toContainText('Кошик');
-
-    await expect(this.itemTitleInCart).toContainText(expectedTitle);
+    const actualTitle = (await this.itemTitleInCart.first().innerText()).replace(/\s+/g, ' ').trim();
+    expect(actualTitle.toLowerCase()).toContain(expectedTitle.toLowerCase());
   }
 
   async countAddedProductToCart(expectedProducts: number) {
@@ -67,7 +67,7 @@ export class CartModal extends BaseModal {
     await expect(this.emtyCardText).toContainText('Ваш кошик порожній.');
   }
 
-  async placeAnOrder(){
+  async placeAnOrder() {
     await this.placeOrder.click();
   }
 }
