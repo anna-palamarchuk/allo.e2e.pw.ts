@@ -41,10 +41,4 @@ export class SignInModal extends BaseModal {
   async clickOnSignInButton(){
     await this.signInBtn.click();
   }
-
-  async verifyLogIn(){
-    await expect(this.profileButton).toBeVisible();
-    await this.clickOnProfileButton();
-    await expect(this.accountMenu).toBeVisible();
-  }
 }

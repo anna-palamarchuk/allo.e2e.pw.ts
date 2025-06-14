@@ -9,7 +9,6 @@ import { CompareProductsPage } from "app/pages/CompareProductsPage";
 import { ProductDetailsPage } from "app/pages/ProductDetailsPage";
 import { FiltersPage } from "app/pages/FiltersPage";
 import { SocialMediaLinks } from "app/pages/SocialMediaLinks";
-import { YouWatchedPage } from "app/pages/YouWatchedPage";
 
 type Fixture = {
     searchPage: SearchPage;
@@ -22,7 +21,6 @@ type Fixture = {
     productDetailsPage: ProductDetailsPage;
     filtersPage: FiltersPage;
     socialMediaLinks: SocialMediaLinks;
-    youWatchedPage: YouWatchedPage;
 }
 
 export const test = base.extend<Fixture>({
@@ -72,9 +70,5 @@ export const test = base.extend<Fixture>({
     socialMediaLinks: async ({ page }, use) => {
         const socialMediaLinks = new SocialMediaLinks(page);
         await use(socialMediaLinks)
-    },
-    youWatchedPage: async ({ page }, use) => {
-        const youWatchedPage = new YouWatchedPage(page);
-        await use(youWatchedPage)
     }
 })
