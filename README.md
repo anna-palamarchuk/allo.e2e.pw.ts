@@ -9,54 +9,54 @@ A modern **end-to-end testing** framework using **Playwright** and **TypeScript*
 ---
 
 ## 🌟 Project structure
+
 allo.e2e.pw.ts/
-├── .github/                  # GitHub Actions workflows
+├── .github/
 │   └── workflows/
-│       └── playwright.yml
-├── tests/                    # All test files grouped by feature or page
-│   ├── home.spec.ts
+│       └── playwright.yml      # CI pipeline for E2E tests
+├── tests/                      # Playwright spec files by feature
 │   ├── login.spec.ts
-│   └── cart.spec.ts
-├── pages/                    # Page Object Models for each key page
-│   ├── HomePage.ts
+│   ├── cart.spec.ts
+│   └── ...                     # additional test suites
+├── pages/                      # Page Object Models (POM)
 │   ├── LoginPage.ts
-│   └── CartPage.ts
-├── modals/                   # Modal components (if used in POM)
+│   ├── CartPage.ts
+│   └── ...                     # more page classes
+├── modals/                     # Shared modal components for POM
 │   └── CartModal.ts
-├── utils/                    # Utility functions, helpers, and data factories
-│   ├── auth.ts
+├── utils/                      # Helpers: auth, test data, etc.
+│   ├── authHelper.ts
 │   └── testData.ts
-├── storage/                  # Authenticated session storage files
+├── storage/                    # Saved states (e.g., auth/session)
 │   └── state.json
-├── .env                      # Environment variables (local only, gitignored)
-├── .gitignore                # Ignore build files, node_modules, etc.
-├── playwright.config.ts      # Playwright configuration file
-├── package.json              # NPM scripts and dependencies
-├── tsconfig.json             # TypeScript configuration
-└── README.md                 # Project documentation
----
+├── playwright.config.ts        # Playwright config and project definitions
+├── .env                        # Local environment (gitignored)
+├── package.json                # Dependencies & npm scripts
+├── tsconfig.json               # TypeScript settings
+└── README.md                   # Documentation and usage guide
 
 ## ✨ Features
 
-- ✅ **Cross-browser testing**: Chromium, Firefox, WebKit  
-- 🧑‍💻 **TypeScript support** for type safety  
-- 🧰 **Page Object Model (POM)** structure for maintainable code  
-- 🧷 Automated **screenshots**, **trace**, and **video recording** on failure  
+- ✅ **Cross-browser testing**: Chromium, Firefox, WebKit
+- 🧑‍💻 **TypeScript support** for type safety
+- 🧰 **Page Object Model (POM)** structure for maintainable code
+- 🧷 Automated **screenshots**, **trace**, and **video recording** on failure
 - 🔧 Flexible configuration with `.env` for different environments
 
 ---
 
 ## ⚙️ Prerequisites
 
-- [Node.js](https://nodejs.org/) v18 or higher  
-- [npm](https://www.npmjs.com/) or [Yarn](https://yarnpkg.com/)  
+- [Node.js](https://nodejs.org/) v18 or higher
+- [npm](https://www.npmjs.com/) or [Yarn](https://yarnpkg.com/)
 - Valid **Allo.ua** credentials (for login flows, etc.)
 
 ---
 
 ## 📦 Installation
 
-1. **Clone the repo**  
+1. **Clone the repo**
    ```bash
    git clone https://github.com/anna-palamarchuk/allo.e2e.pw.ts.git
    cd allo.e2e.pw.ts
+   ```
