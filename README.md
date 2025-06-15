@@ -9,7 +9,7 @@ A modern **end-to-end testing** framework using **Playwright** and **TypeScript*
 ---
 
 ## 🌟 Project structure
-
+... bash
 allo.e2e.pw.ts/
 ├── .github/
 │   └── workflows/
@@ -34,7 +34,7 @@ allo.e2e.pw.ts/
 ├── package.json                # Dependencies & npm scripts
 ├── tsconfig.json               # TypeScript settings
 └── README.md                   # Documentation and usage guide
-
+...
 ## ✨ Features
 
 - ✅ **Cross-browser testing**: Chromium, Firefox, WebKit
