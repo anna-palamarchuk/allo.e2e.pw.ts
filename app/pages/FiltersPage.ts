@@ -41,7 +41,9 @@ export class FiltersPage extends BasePage {
     async choosePriceFromPriceFilter() {
         await expect(this.priceFilterTitle).toBeVisible();
         await expect(this.priceFilterTitle).toContainText('Ціна, ₴');
+        await this.priceRange.nth(0).click();
         await this.priceRange.nth(0).fill('15000');
+        await this.priceRange.nth(1).click();
         await this.priceRange.nth(1).fill('35000');
         await this.getShowProductPopup();
     }
