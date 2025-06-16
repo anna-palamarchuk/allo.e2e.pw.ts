@@ -39,8 +39,19 @@ export class CartModal extends BaseModal {
     }
 
     await expect(this.cartHeader).toContainText('Кошик');
-    const actualTitle = (await this.itemTitleInCart.first().innerText()).replace(/\s+/g, ' ').trim();
-    expect(actualTitle.toLowerCase()).toContain(expectedTitle.toLowerCase());
+    const rawActualTitle = await this.itemTitleInCart.first().innerText();
+    const actualTitle = rawActualTitle
+      .replace(/продавець:.*/i, '')
+      .replace(/\s+/g, ' ')
+      .trim()
+      .toLowerCase();
+
+    const normalizedExpectedTitle = expectedTitle
+      .replace(/\s+/g, ' ')
+      .trim()
+      .toLowerCase();
+
+    expect(actualTitle).toContain(normalizedExpectedTitle);
   }
 
   async countAddedProductToCart(expectedProducts: number) {

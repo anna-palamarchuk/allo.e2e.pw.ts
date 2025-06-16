@@ -9,7 +9,7 @@ export class SocialMediaLinks extends BasePage {
     facebook: 'https://www.facebook.com/allo',
     instagram: 'https://www.instagram.com/allo/',
     telegram: 'https://t.me/allonews',
-    youtube: 'https://www.youtube.com/user/allouavideo?sub_confirmation=1',
+    youtube: 'https://www.youtube.com/user/allouavideo',
     tiktok: 'https://www.tiktok.com/@allo.official'
   };
 
