@@ -1,8 +1,6 @@
 🚀 Allo E2E Test Automation
 
-[![Build Status](https://img.shields.io/github/actions/workflow/status/anna-palamarchuk/allo.e2e.pw.ts/ci.yml?branch=main&label=CI&logo=github)](https://github.com/anna-palamarchuk/allo.e2e.pw.ts/actions)
-[![Playwright](https://img.shields.io/badge/Playwright-1.40-blue)](https://playwright.dev/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Build Status](https://github.com/anna-palamarchuk/allo.e2e.pw.ts/actions/workflows/playwright.yml/badge.svg?branch=main)](https://github.com/anna-palamarchuk/allo.e2e.pw.ts/actions/workflows/playwright.yml)
 
 A modern **end-to-end testing** framework using **Playwright** and **TypeScript** for the [Allo](https://allo.ua) website.
 
