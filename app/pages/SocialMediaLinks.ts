@@ -34,10 +34,20 @@ export class SocialMediaLinks extends BasePage {
         this.page.context().waitForEvent('page'),
         link.click()
       ]);
-
       await socialPage.waitForLoadState();
       const actualUrl = socialPage.url();
-      expect(actualUrl).toContain(expectedUrl);
+      if (ariaLabel === 'instagram') {
+        const urlObj = new URL(actualUrl);
+        const nextParam = urlObj.searchParams.get('next');
+        if (nextParam) {
+          expect(decodeURIComponent(nextParam)).toContain('/allo/');
+        } else {
+          expect(actualUrl).toContain('/allo/');
+        }
+      } else {
+        expect(actualUrl).toContain(expectedUrl);
+      }
+
       await socialPage.close();
     }
   }

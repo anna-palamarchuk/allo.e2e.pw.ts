@@ -18,7 +18,7 @@ export class SignInModal extends BaseModal {
     this.phoneOrEmailField = page.locator("input[placeholder='Введіть телефон або e-mail']")
     this.passwordField = page.locator("input[placeholder='Введіть пароль']");
     this.signInBtn = page.locator('//button[contains(., "Увійти")]');
-    this.profileButton = page.locator('.mh-profile button');
+    this.profileButton = page.locator('button[aria-label="Профіль"]');
     this.accountMenu = page.locator('.mh-profile__content');
   }
 
