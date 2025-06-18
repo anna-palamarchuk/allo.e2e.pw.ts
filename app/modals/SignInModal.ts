@@ -23,6 +23,7 @@ export class SignInModal extends BaseModal {
   }
 
   async clickOnProfileButton(){
+    await expect(this.profileButton).toBeVisible();
     await this.profileButton.click();
   }
   async waitForSignInMenuIsVisible() {
