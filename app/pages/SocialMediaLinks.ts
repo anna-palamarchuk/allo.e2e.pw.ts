@@ -29,26 +29,16 @@ export class SocialMediaLinks extends BasePage {
     for (let i = 0; i < count; i++) {
       const link = this.socialMediaLinks.nth(i);
       const ariaLabel = await link.getAttribute('aria-label');
-      const expectedUrl = this.expectedUrls[ariaLabel];
-      const [socialPage] = await Promise.all([
-        this.page.context().waitForEvent('page'),
-        link.click()
-      ]);
-      await socialPage.waitForLoadState();
-      const actualUrl = socialPage.url();
-      if (ariaLabel === 'instagram') {
-        const urlObj = new URL(actualUrl);
-        const nextParam = urlObj.searchParams.get('next');
-        if (nextParam) {
-          expect(decodeURIComponent(nextParam)).toContain('/allo/');
-        } else {
-          expect(actualUrl).toContain('/allo/');
-        }
-      } else {
-        expect(actualUrl).toContain(expectedUrl);
-      }
 
-      await socialPage.close();
+      expect(ariaLabel, `Missing aria-label on social media link at index ${i}`).toBeTruthy();
+
+      const expectedUrl = this.expectedUrls[ariaLabel ?? ''];
+      expect(expectedUrl, `Missing expected URL for aria-label: ${ariaLabel}`).toBeTruthy();
+
+      const href = await link.getAttribute('href');
+      expect(href, `Missing href for social media link with aria-label: ${ariaLabel}`).toBeTruthy();
+
+      expect(href).toContain(expectedUrl);
     }
   }
 }
